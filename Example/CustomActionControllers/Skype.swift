@@ -61,6 +61,7 @@ open class SkypeActionController: ActionController<SkypeCell, String, UICollecti
 
     open var backgroundColor: UIColor = UIColor(colorLiteralRed: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
     open var foregroundColor: UIColor = UIColor.white
+    open var dismissHandler: ((Void) -> Void)?
 
     fileprivate var contextView: ContextView!
     fileprivate var normalAnimationRect: UIView!
@@ -167,7 +168,7 @@ open class SkypeActionController: ActionController<SkypeCell, String, UICollecti
     override open func dismissView(_ presentedView: UIView, presentingView: UIView, animationDuration: Double, completion: ((_ completed: Bool) -> Void)?) {
         finishAnimation()
         finishAnimation()
-        
+        self.dismissHandler?()
         let animationSettings = settings.animation.dismiss
         UIView.animate(withDuration: animationDuration,
             delay: animationSettings.delay,
