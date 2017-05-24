@@ -36,7 +36,8 @@ public struct Action<T> {
 
     public var enabled: Bool
     public var executeImmediatelyOnTouch = false
-
+    public var subData = ""
+    
     public fileprivate(set) var data: T?
     public fileprivate(set) var style = ActionStyle.default
     public fileprivate(set) var handler: ((Action<T>) -> Void)?
@@ -46,6 +47,15 @@ public struct Action<T> {
         self.executeImmediatelyOnTouch = executeImmediatelyOnTouch
         self.data = data
         self.style = style
+        self.handler = handler
+    }
+
+    public init(_ data: T?, subData: String, style: ActionStyle, executeImmediatelyOnTouch: Bool = false, handler: ((Action<T>) -> Void)?) {
+        enabled = true
+        self.executeImmediatelyOnTouch = executeImmediatelyOnTouch
+        self.data = data
+        self.style = style
+        self.subData = subData
         self.handler = handler
     }
 

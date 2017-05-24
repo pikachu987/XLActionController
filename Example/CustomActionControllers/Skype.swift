@@ -30,6 +30,7 @@ import XLActionController
 open class SkypeCell: UICollectionViewCell {
     
     @IBOutlet weak var actionTitleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +52,7 @@ open class SkypeCell: UICollectionViewCell {
         let backgroundView = UIView()
         backgroundView.backgroundColor = backgroundColor
         selectedBackgroundView = backgroundView
+        self.actionTitleLabel.textAlignment = .center
     }
 }
 
@@ -58,6 +60,7 @@ open class SkypeCell: UICollectionViewCell {
 open class SkypeActionController: ActionController<SkypeCell, String, UICollectionReusableView, Void, UICollectionReusableView, Void> {
 
     open var backgroundColor: UIColor = UIColor(colorLiteralRed: 18/255.0, green: 165/255.0, blue: 244/255.0, alpha: 1.0)
+    open var foregroundColor: UIColor = UIColor.white
 
     fileprivate var contextView: ContextView!
     fileprivate var normalAnimationRect: UIView!
@@ -78,7 +81,9 @@ open class SkypeActionController: ActionController<SkypeCell, String, UICollecti
 
         onConfigureCellForAction = { cell, action, indexPath in
             cell.actionTitleLabel.text = action.data
-            cell.actionTitleLabel.textColor = .white
+            cell.subTitleLabel.text = action.subData
+            cell.actionTitleLabel.textColor = self.foregroundColor
+            cell.subTitleLabel.textColor = self.foregroundColor
             cell.alpha = action.enabled ? 1.0 : 0.5
         }
     }
